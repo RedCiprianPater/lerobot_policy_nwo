@@ -7,10 +7,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/lerobot_policy_nwo
-
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -25,12 +22,10 @@ jobs:
           pip install build twine
 
       - name: Build package
-        run: |
-          python -m build
+        run: python -m build
 
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          twine upload dist/*
+        run: twine upload dist/*
